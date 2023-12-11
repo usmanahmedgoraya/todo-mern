@@ -17,6 +17,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get('/api/ada', (req, res) => {
+  res.send('Hello World!')
+})
+
+
 // API Endpoint through Routing
 app.use("/api", require("./routes/Todo"))
 
