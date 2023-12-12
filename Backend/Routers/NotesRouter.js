@@ -23,7 +23,7 @@ router.post('/todos', async (req, res) => {
             return res.status(404).json({ message: 'Notes not found' });
         }
         console.log('Notes documents retrieved successfully');
-        res.status(200).json({ status: true, data: notes });
+        res.status(200).json({ notes });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error getting Notes documents', error: error.message });

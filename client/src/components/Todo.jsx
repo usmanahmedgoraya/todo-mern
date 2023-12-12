@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from "react";
 import TodoList from "./TodoList";
 import { FaRegSquarePlus } from "react-icons/fa6";
@@ -12,9 +13,10 @@ const Todo = () => {
     const [desc, setDesc] = useState();
     const [editData, setEditData] = useState();
     const titleRef = useRef(null)
+    const [stateManage, setStateManage] = useState(false);
     const descRef = useRef(null)
 
-    let domain = "https://todo-mern-3cld.vercel.app/"
+    let domain = "https://todo-mern-3cld.vercel.app"
 
     // Fetch all the todo
     const fetchALLTodo = async () => {
@@ -23,7 +25,8 @@ const Todo = () => {
                 method: "get"
             })
             const data = await res.json();
-            setTodos(data)
+            console.log(data)
+            setTodos(data.data)
         } catch (error) {
             console.log(error.message);
         }
@@ -32,7 +35,7 @@ const Todo = () => {
     // handle the fetch all data
     useEffect(() => {
         fetchALLTodo()
-    }, [todos])
+    }, [stateManage])
 
     // Handle Input function
     const handleInput = (e) => {
@@ -55,11 +58,13 @@ const Todo = () => {
                         method: "post",
                         headers: {
                             "Content-Type": "application/json",
+                            
                         },
                         body: JSON.stringify({ title, desc }),
                     });
                     const data = await res.json();
                     console.log(data);
+                    setStateManage(prev => !prev);
                     toast.success('Todo Add Successfully', {
                         position: "top-right",
                         autoClose: 1000,
@@ -128,6 +133,7 @@ const Todo = () => {
             });
             const data = await res.json();
             console.log(data);
+            setStateManage(prev => !prev);
             toast.success('Edited Successfully', {
                 position: "top-right",
                 autoClose: 1000,
@@ -164,6 +170,7 @@ const Todo = () => {
             });
             const data = await res.json();
             console.log(data);
+            setStateManage(prev => !prev);
             toast.success('Deleted Successfully', {
                 position: "top-right",
                 autoClose: 1000,
@@ -201,6 +208,7 @@ const Todo = () => {
             });
             const data = await res.json();
             console.log(data);
+            setStateManage(prev => !prev);
             toast.success('All Todo Clear Successfully', {
                 position: "top-right",
                 autoClose: 1000,
@@ -224,6 +232,7 @@ const Todo = () => {
             });
             const data = await res.json()
             console.log(data);
+            setStateManage(prev => !prev);
             toast.success('Completed Tasks Delete Successfully', {
                 position: "bottom-left",
                 autoClose: 1000,
@@ -288,14 +297,14 @@ const Todo = () => {
                     All Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos.length}</span>
                 </div>
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Complete Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos.filter(todo => todo.completed).length}</span>
+                    Complete Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{Array.isArray(todos) && todos.filter(todo => todo.completed).length}</span>
                 </div>
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos.filter(todo => !todo.completed).length}</span>
+                    Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{Array.isArray(todos) && todos.filter(todo => !todo.completed).length}</span>
                 </div>
             </div>
             <div className="mt-8 flex flex-wrap justify-center w-full dark:bg-slate-800 ">
-                {todos.map((todo) => {
+                {Array.isArray(todos) && todos.map((todo) => {
                     return (
                         <div key={todo._id} className="m-2 mb-8 dark:bg-slate-800">
                             <TodoList todo={todo} editData={editData} setEditData={setEditData} handleEditTodo={handleEditTodo} handleDeleteTodo={handleDeleteTodo} />

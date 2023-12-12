@@ -25,7 +25,7 @@ const TodoList = ({ todo, editData, setEditData, handleEditTodo, handleDeleteTod
             setEditData(updatedTodo);
 
             // Make the API call in the background
-            const res = await fetch(`https://todo-mern-3cld.vercel.app//${todo._id}`, {
+            const res = await fetch(`https://todo-mern-3cld.vercel.app/${todo._id}`, {
                 method: "put"
             });
             const data = await res.json();
