@@ -8,9 +8,14 @@ const cors = require('cors');
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors({
-  origin:"http://localhost:5173/"
-}));
+app.use(cors());
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 // Test API Endpoint
 app.get('/', (req, res) => {
