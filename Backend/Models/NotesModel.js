@@ -1,25 +1,9 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const mongoose = require("mongoose");
 
-// * Creation of Notes Schema
-const notesSchema = new mongoose.Schema({
+const todoSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    desc: { type: String, required: true },
+    completed: { type: Boolean, default: false },
+})
 
-    title: {
-        type: String,
-    },
-
-    description: {
-        type: String
-    },
-
-    Completed:{
-        type: Boolean,
-        default: false
-    }
-}, {
-    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
-});
-
-// * Creation of model
-const Todo = mongoose.model('Todo', notesSchema);
-module.exports = Todo;
+module.exports = mongoose.model('Todo', todoSchema)

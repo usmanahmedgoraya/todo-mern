@@ -6,10 +6,8 @@ const Todo = require("../model/todoModel")
 router.post('/todos', async (req, res) => {
   try {
     const { title, desc, completed } = req.body;
-    if(title && desc){
       const todo = new Todo({ title, desc, completed });
       await todo.save();
-    }
     res.status(200).json({todo});
   } catch (error) {
     res.status(500).json({ error: error.message });

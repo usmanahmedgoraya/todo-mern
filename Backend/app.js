@@ -5,7 +5,7 @@ require('./db/connectdb')
 const notesRouter = require('./Routers/NotesRouter')
 
 // * Connecting To Port
-const port = 1126;
+const port = 3000;
 app.use(cors({
   origin:"http://localhost:5173"
 }));
