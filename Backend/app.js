@@ -11,7 +11,7 @@ const port = 3000;
 // * Automatically parse incoming JSON to an object so we access it in our request handlers
 app.use(express.json());
 app.use(cors({
-  origin:"http://localhost:5173"
+  origin:"https://todo-mern-fronten-end.vercel.app"
 }));
 
 
