@@ -11,5 +11,11 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ]
+  ],
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x",
+      "timeout": 30 
+    }
+  }
 }
