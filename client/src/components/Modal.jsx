@@ -1,12 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 
-export default function Modal({ handleEdit }) {
+export default function Modal({ handleEdit, todo }) {
     const [showModal, setShowModal] = React.useState(false);
     const [title, setTitle] = useState()
     const [desc, setDesc] = useState()
+
+    useEffect(() => {
+      setTitle(todo.title)
+      setDesc(todo.desc)
+    }, [])
+    
 
     // Handle Input function
     const handleInput = (e) => {
@@ -52,11 +60,11 @@ export default function Modal({ handleEdit }) {
                                 <div className="relative p-6 flex-auto dark:bg-gray-700 dark:text-white">
                                     <div>
                                         <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                                        <input type="text" name="title" id="title" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={handleInput} />
+                                        <input type="text" name="title" id="title" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={title} required onChange={handleInput} />
                                     </div>
                                     <div className="my-4">
                                         <label htmlFor="desc" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                                        <input type="text" name="desc" id="desc" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" onChange={handleInput} required />
+                                        <input type="text" name="desc" id="desc" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={desc} onChange={handleInput} required />
                                     </div>
                                 </div>
                                 {/*footer*/}

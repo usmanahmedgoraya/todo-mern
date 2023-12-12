@@ -25,8 +25,8 @@ const Todo = () => {
                 method: "get"
             })
             const data = await res.json();
-            console.log(data)
-            setTodos(data.data)
+            console.log(data.todo)
+            setTodos(data.todo.reverse())
         } catch (error) {
             console.log(error.message);
         }
@@ -294,20 +294,20 @@ const Todo = () => {
             <div className="flex justify-center flex-wrap my-8 space-x-4">
 
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    All Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos.length}</span>
+                    All Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos.length}</span>
                 </div>
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Complete Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{Array.isArray(todos) && todos.filter(todo => todo.completed).length}</span>
+                    Complete Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos.filter(todo => todo.completed).length}</span>
                 </div>
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{Array.isArray(todos) && todos.filter(todo => !todo.completed).length}</span>
+                    Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' &&  todos.filter(todo => !todo.completed).length }</span>
                 </div>
             </div>
             <div className="mt-8 flex flex-wrap justify-center w-full dark:bg-slate-800 ">
                 {Array.isArray(todos) && todos.map((todo) => {
                     return (
                         <div key={todo._id} className="m-2 mb-8 dark:bg-slate-800">
-                            <TodoList todo={todo} editData={editData} setEditData={setEditData} handleEditTodo={handleEditTodo} handleDeleteTodo={handleDeleteTodo} />
+                            <TodoList todo={todo} editData={editData} setEditData={setEditData} handleEditTodo={handleEditTodo} handleDeleteTodo={handleDeleteTodo} setStateManage={setStateManage} />
                         </div>
                     )
                 })}

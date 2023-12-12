@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const TodoList = ({ todo, editData, setEditData, handleEditTodo, handleDeleteTodo }) => {
+const TodoList = ({ todo, setEditData, handleEditTodo, handleDeleteTodo,setStateManage }) => {
 
     const checkboxRef = useRef(null)
 
@@ -25,12 +25,13 @@ const TodoList = ({ todo, editData, setEditData, handleEditTodo, handleDeleteTod
             setEditData(updatedTodo);
 
             // Make the API call in the background
-            const res = await fetch(`https://todo-mern-3cld.vercel.app/${todo._id}`, {
+            const res = await fetch(`https://todo-mern-3cld.vercel.app/complete-todo/${todo._id}`, {
                 method: "put"
             });
             const data = await res.json();
             console.log(data.todo.completed);
-            if(data.todo.completed === true){
+            setStateManage(prev=>!prev);
+            if (data.todo.completed === true) {
                 toast.success('Todo Uncompleted Successfully', {
                     position: "top-right",
                     autoClose: 1300,
@@ -42,7 +43,7 @@ const TodoList = ({ todo, editData, setEditData, handleEditTodo, handleDeleteTod
                     theme: "dark",
                 });
             }
-            else{
+            else {
                 toast.success('Todo Complete Successfully', {
                     position: "top-right",
                     autoClose: 1300,
@@ -75,14 +76,19 @@ const TodoList = ({ todo, editData, setEditData, handleEditTodo, handleDeleteTod
             />
             <div className="block max-w-[20rem] p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer">
                 <div className="grid grid-cols-6 place-items-center">
-                    {todo.completed !== undefined && 
+                    {todo.completed !== undefined &&
                         <div className="checkbox-wrapper dark:text-white" >
-                        <label>
-                          <input checked={todo.completed} type="checkbox" className="dark:text-white" onChange={() => handleCompletedTodo(todo._id, !todo.completed)}/>
-                          <span className="checkbox dark:text-white border-red-600" ></span>
-                        </label>
-                      </div>
-                        
+                            <label>
+                                <input
+                                    checked={todo.completed}
+                                    type="checkbox"
+                                    className="dark:text-white"
+                                    onChange={() => handleCompletedTodo(todo._id, !todo.completed)}
+                                />
+                                <span className="checkbox dark:text-white border-red-600" ></span>
+                            </label>
+                        </div>
+
                     }
 
                     <div className="col-span-4 p-2">
@@ -90,7 +96,7 @@ const TodoList = ({ todo, editData, setEditData, handleEditTodo, handleDeleteTod
                         <p className="font-normal text-gray-700 dark:text-gray-400">{todo.desc}</p>
                     </div>
                     <div className="flex space-x-2 text-xl mt-2">
-                        <Modal handleEdit={handleEdit}  />
+                        <Modal handleEdit={handleEdit} todo={todo}  />
                         <MdDelete className="cursor-pointer dark:text-white hover:text-red-700 dark:hover:text-red-500" onClick={handleDelete} />
                     </div>
                 </div>
