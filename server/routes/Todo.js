@@ -6,9 +6,11 @@ const Todo = require("../model/todoModel")
 router.post('/todos', async (req, res) => {
   try {
     const { title, desc, completed } = req.body;
-    const todo = new Todo({ title, desc, completed });
-    await todo.save();
-    res.json(todo);
+    if(title && desc){
+      const todo = new Todo({ title, desc, completed });
+      await todo.save();
+    }
+    res.status(200).json({todo});
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -18,7 +20,9 @@ router.post('/todos', async (req, res) => {
 router.get('/todos', async (req, res) => {
   try {
     const todos = await Todo.find({});
-    res.status(200).json(todos);
+    if(todos){
+      res.status(200).json(todos);
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
