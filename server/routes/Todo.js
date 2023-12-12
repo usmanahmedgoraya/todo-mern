@@ -17,18 +17,22 @@ router.post('/todos', async (req, res) => {
 });
 
 // Get all Todos
-router.get('/all-todos', async (req, res) => {
+router.get('/get-all-notes', async (req, res) => {
   try {
-    const todos = await Todo.find();
-    if(!todos){
-      res.status(404).json({msg:"Not found"});
-    }
-
-    res.status(200).json({todos})
+      const notes = await Todo.find();
+      if (!notes) {
+          console.log('Notes documents not found');
+          return res.status(404).json({ message: 'Notes not found' });
+      }
+      console.log('Notes documents retrieved successfully');
+      res.status(200).json({ status: true, data: notes });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+      console.error(error);
+      res.status(500).json({ message: 'Error getting Notes documents', error: error.message });
   }
 });
+
+
 
 // Update Todo
 router.put('/todos/:id', async (req, res) => {
