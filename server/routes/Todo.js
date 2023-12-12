@@ -19,10 +19,12 @@ router.post('/todos', async (req, res) => {
 // Get all Todos
 router.get('/all-todos', async (req, res) => {
   try {
-    const todos = await Todo.find({});
-    if(todos){
-      res.status(200).json(todos);
+    const todos = await Todo.find();
+    if(!todos){
+      res.status(404).json({msg:"Not found"});
     }
+
+    res.status(200).json({todos})
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

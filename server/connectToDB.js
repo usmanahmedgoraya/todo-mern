@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-
+let uri = "mongodb+srv://gorayausman061:Z0GiGTFr4JIPiUvl@cluster0.vdk3ku9.mongodb.net/TODO?retryWrites=true&w=majority"
 // dunction for Database connection
-const connectDB = async (uri) => {
+const connectDB = async () => {
   try {
     await mongoose.connect(uri);
     console.log('MongoDB Connected');

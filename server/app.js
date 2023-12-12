@@ -34,5 +34,5 @@ app.use("/", require("./routes/Todo"))
 // Listening the API Endpoint
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
-  connectToMongoose(process.env.MONGO_URI)
+  connectToMongoose()
 })
