@@ -28,7 +28,7 @@ app.get('/api/ada', (req, res) => {
 
 
 // API Endpoint through Routing
-app.use("/api", require("./routes/Todo"))
+app.use("/", require("./routes/Todo"))
 
 
 // Listening the API Endpoint
