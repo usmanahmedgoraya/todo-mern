@@ -14,12 +14,12 @@ const Todo = () => {
     const titleRef = useRef(null)
     const descRef = useRef(null)
 
-    let domain = "https://todo-mern-coral.vercel.app"
+    let domain = "https://todo-mern-3cld.vercel.app/"
 
     // Fetch all the todo
     const fetchALLTodo = async () => {
         try {
-            const res = await fetch(`${domain}/api/todos`, {
+            const res = await fetch(`${domain}/todos`, {
                 method: "get"
             })
             const data = await res.json();
@@ -51,7 +51,7 @@ const Todo = () => {
             if (title && desc) {
                 if (title.length <= 40) {
 
-                    const res = await fetch(`${domain}/api/todos`, {
+                    const res = await fetch(`${domain}/todos`, {
                         method: "post",
                         headers: {
                             "Content-Type": "application/json",
@@ -119,7 +119,7 @@ const Todo = () => {
     // Handle Function for Edit
     const handleEditTodo = async (id, title, desc) => {
         try {
-            const res = await fetch(`${domain}/api/todos/${id}`, {
+            const res = await fetch(`${domain}/todos/${id}`, {
                 method: "put",
                 headers: {
                     "Content-Type": "application/json",
@@ -156,7 +156,7 @@ const Todo = () => {
     // Handle Function for Delete
     const handleDeleteTodo = async (id) => {
         try {
-            const res = await fetch(`${domain}/api/todos/${id}`, {
+            const res = await fetch(`${domain}/todos/${id}`, {
                 method: "delete",
                 headers: {
                     "Content-Type": "application/json",
@@ -193,7 +193,7 @@ const Todo = () => {
     // Clear All Todo Function
     const handleClearAll = async () => {
         try {
-            const res = await fetch(`${domain}/api/clear-todos`, {
+            const res = await fetch(`${domain}/clear-todos`, {
                 method: "delete",
                 headers: {
                     "Content-Type": "application/json",
@@ -219,7 +219,7 @@ const Todo = () => {
     // Clear all completed task
     const handleClearCompleted = async () => {
         try {
-            const res = await fetch(`${domain}/api/todos/clear-complete-todo`, {
+            const res = await fetch(`${domain}/clear-complete-todo`, {
                 method: "delete"
             });
             const data = await res.json()

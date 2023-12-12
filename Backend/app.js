@@ -6,9 +6,7 @@ const notesRouter = require('./Routers/NotesRouter')
 
 // * Connecting To Port
 const port = 3000;
-app.use(cors({
-  origin:"http://localhost:5173"
-}));
+
 
 // * Automatically parse incoming JSON to an object so we access it in our request handlers
 app.use(express.json())
