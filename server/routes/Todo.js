@@ -17,7 +17,7 @@ router.post('/todos', async (req, res) => {
 });
 
 // Get all Todos
-router.get('/todos', async (req, res) => {
+router.get('/all-todos', async (req, res) => {
   try {
     const todos = await Todo.find({});
     if(todos){
