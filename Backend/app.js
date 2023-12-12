@@ -12,9 +12,6 @@ const port = 3000;
 app.use(express.json())
 
 
-app.get("/",(req,res)=>{
-  res.status(200).json({message:"success"})
-})
 
 app.use(express.urlencoded({extended: false}))
   
@@ -27,6 +24,9 @@ app.use((req, res, next) => {
   next();
 });
   
+app.get("/",(req,res)=>{
+  res.status(200).json({message:"success"})
+})
 app.use(notesRouter);
 
 // * listening To Port
